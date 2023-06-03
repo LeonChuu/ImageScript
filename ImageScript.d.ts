@@ -149,6 +149,16 @@ export class Frame extends Image {
 
   static get DISPOSAL_BACKGROUND(): string
 
+  duration: number;
+
+  xOffset: number;
+
+  yOffset: number;
+
+  get disposalMode(): number;
+
+  set disposalMode(disposalMode: string|number);
+
   private static __convert_disposal_mode__(mode: string | number): any;
 
   constructor(width: number, height: number, duration?: number, xOffset?: number, yOffset?: number, disposalMode?: typeof Frame.DISPOSAL_KEEP | string);
