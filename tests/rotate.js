@@ -86,4 +86,17 @@ const panic = msg => {
         if (!Buffer.from(image.bitmap).equals(Buffer.from(image.rotate(360).bitmap)))
             panic('rotate 360 failed');
     }
+
+    {
+        const binary = await fs.readFile('./tests/sources/non_square_image.png');
+        const image = await Image.decode(binary);
+        image.rotate(90);
+
+        const encoded = await image.encode(1, {creationTime: 0, software: ''});
+
+        const target = await fs.readFile('./tests/targets/non_square_rotated_90.png');
+        if (!Buffer.from(target).equals(Buffer.from(encoded))) {
+            panic('rotate 90 non-square failed');
+        }
+    }
 })();
